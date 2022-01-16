@@ -1,0 +1,39 @@
+name: audit
+
+on:
+  push:
+
+jobs:
+
+  audit:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: set-up-go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.17
+
+      - name: verify-dependencies
+        run: go mod verify
+
+      - name: build
+        run: go build -v ./...
+
+      - name: run-go-vet
+        run: go vet ./...
+
+      - name: install-staticcheck
+        run: go install honnef.co/go/tools/cmd/staticcheck@latest
+
+      - name: run-staticcheck
+        run: staticcheck ./...
+
+      - name: install-golint
+        run: go install golang.org/x/lint/golint@latest
+
+      - name: run-golint
+        run: golint ./...
+
+      - name: run-tests
+        run: go test -race -vet=off ./...
