@@ -15,6 +15,7 @@ Some exercise in Go (https://go.dev/)
 
 * [Articles](docs/articles.md)
 * [Videos](docs/videos.md)
+* [Awesome Go](https://github.com/avelino/awesome-go) (*Large listing of popular third-party Go packages*)
 
 ## Run tests
 
